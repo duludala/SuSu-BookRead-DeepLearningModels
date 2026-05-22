@@ -1,0 +1,20 @@
+# 模型和权重文件
+*.pth
+*.pt
+*.onnx
+*.weights
+data/
+datasets/
+checkpoints/
+
+# 日志和缓存
+logs/
+*.log
+__pycache__/
+*.pyc
+.uv/
+.ruff_cache/
+
+# 环境文件
+.env
+venv/

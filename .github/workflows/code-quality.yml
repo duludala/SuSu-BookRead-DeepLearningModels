@@ -1,0 +1,33 @@
+﻿name: 代码质量检查
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+    types: [opened, synchronize, reopened]
+
+jobs:
+  ruff:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 设置Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 安装uv
+        uses: astral-sh/setup-uv@v2
+        with:
+          version: "latest"
+
+      - name: 安装依赖
+        run: uv sync --frozen
+
+      - name: 运行代码检查
+        run: uv run ruff check .
+
+      - name: 运行格式检查
+        run: uv run ruff format . --check
